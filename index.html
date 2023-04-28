@@ -33,40 +33,17 @@
 </head>
 <body>
   Hello
-  <form>
-    <div>
-      <label>Select file to upload</label>
-      <input type="file" id="fileinput">
-    </div>
-  </form>
-  <script>
-    const input = document.getElementById('fileinput');
+  <script type="module">
+    import  { initTgWebAppData } from "./js/api.js";
+    import { keyBatches} from "./js/keybatches.js";
+    import { isTest} from "./config.js";
 
-    // This will upload the file after having read it
-    const upload = (file) => {
-      fetch("https://ioepasbqtvuiwoh775h65w3vhy0daieo.lambda-url.eu-central-1.on.aws/", { // Your POST endpoint
-        method: "POST",
-        //headers: {
-          // Content-Type may need to be completely **omitted**
-          // or you may need something
-          //"Content-Type": "You will perhaps need to define a content-type here"
-        //},
-        body: file // This is your file object
-      }).then(
-          response => response.json() // if the response is a JSON object
-      ).then(
-          success => console.log(success) // Handle the success response object
-      ).catch(
-          error => console.log(error) // Handle the error response object
-      );
-    };
-
-    // Event handler executed when a file is selected
-    const onSelectFile = () => upload(input.files[0]);
-
-    // Add a listener on your input
-    // It will be triggered when a file will be selected
-    input.addEventListener('change', onSelectFile, false);
+    if (!isTest) {
+      const tg = window.Telegram.WebApp;
+      tg.expand()
+      initTgWebAppData(tg.initData)
+    }
+    keyBatches(document.body)
   </script>
 </body>
 </html>
