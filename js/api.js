@@ -37,7 +37,7 @@ export function putKeybatch(file) {
       "X-WebAppData": tgWebAppData,
       // Content-Type may need to be completely **omitted**
       // or you may need something
-      //"Content-Type": "You will perhaps need to define a content-type here"
+      "Content-Type": "text/plain"
     },
     mode: "cors",
     method: "POST",
