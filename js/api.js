@@ -27,7 +27,7 @@ export function getKeybatches() {
     return fetch(`${apiEndpoint}/api/v1/keybatches`, {
       headers: {"X-WebAppData": tgWebAppData},
       mode: "cors"
-    })
+    }).then (response => response.json())
   }
 }
 
