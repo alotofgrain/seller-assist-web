@@ -1,4 +1,4 @@
-import {apiEndpoint, isTest} from "../config.js";
+import {apiUrl, isTest} from "../config.js";
 
 
 let tgWebAppData = null
@@ -24,7 +24,7 @@ export function initTgWebAppData(data) {
 export function getKeybatches() {
   if (isTest) return Promise.resolve(testKeyBatches)
   else {
-    return fetch(`${apiEndpoint}/api/v1/keybatches`, {
+    return fetch(`${apiUrl}/api/v1/keybatches`, {
       headers: {"X-WebAppData": tgWebAppData},
       mode: "cors"
     }).then (response => response.json())
@@ -32,11 +32,9 @@ export function getKeybatches() {
 }
 
 export function putKeybatch(file) {
-  return fetch(`${apiEndpoint}/api/v1/keybatch`, {
+  return fetch(`${apiUrl}/api/v1/keybatch`, {
     headers: {
       "X-WebAppData": tgWebAppData,
-      // Content-Type may need to be completely **omitted**
-      // or you may need something
       "Content-Type": "text/plain"
     },
     mode: "cors",
